@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import Logo from './components/Logo';
+import DateTime from './components/DateTime';
+import Legend from './components/Legend';
+import UserContainer from './components/UserContainer';
+import SensorCard from './components/SensorCard';
+import DarkModeToggle from './components/DarkModeToggle';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const sensors = [
+    { label: 'Temperature', icon: '🌡️', value: '61', unit: 'ppm' },
+    { label: 'Humidity', icon: '💧', value: '61', unit: 'ppm' },
+    { label: 'Carbon Monoxide', icon: '☁️', value: '61', unit: 'ppm' },
+    { label: 'Carbon Dioxide', icon: '☁️', value: '61', unit: 'ppm' },
+    { label: 'Butane', icon: '☁️', value: '61', unit: 'ppm' },
+    { label: 'Propane', icon: '☁️', value: '61', unit: 'ppm' },
+  ];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="min-h-screen bg-white dark:bg-slate-900 text-black dark:text-white font-sans">
+      <header className="flex items-center justify-between p-4">
+        <Logo />
+        <div className="flex items-center gap-4">
+          <DateTime />
+          <UserContainer />
+        </div>
+      </header>
 
-export default App
+      <main className="p-4">
+        <Legend />
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {sensors.map((sensor) => (
+            <SensorCard
+              key={sensor.label}
+              label={sensor.label}
+              icon={sensor.icon}
+              value={sensor.value}
+              unit={sensor.unit}
+            />
+          ))}
+        </div>
+      </main>
+
+      <footer className="p-4 flex justify-between items-center">
+        <DarkModeToggle />
+        <div className="rounded-full bg-yellow-500 p-2">⚠️</div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
