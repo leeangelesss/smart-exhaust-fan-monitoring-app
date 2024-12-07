@@ -9,9 +9,13 @@ const DateTime = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-1">
-      <span>{time.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</span>
-      <span className="font-bold text-xl text-right">{time.toLocaleTimeString()}</span>
+    <div className="flex flex-col items-end gap-1 text-right">
+      <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">
+        {time.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+      </span>
+      <span className="font-bold text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
+        {time.toLocaleTimeString()}
+      </span>
     </div>
   );
 };
