@@ -9,7 +9,7 @@ const sensors = [
     { 
         label: 'Temperature', 
         icon: temperature, 
-        value: '35', 
+        value: '20', 
         unit: '°C', // Degree Celsius
         minValue: '0',
         maxValue: '100',
@@ -17,7 +17,7 @@ const sensors = [
     { 
         label: 'Humidity', 
         icon: humidity, 
-        value: '42', 
+        value: '78', 
         unit: '%', // Percentage
         minValue: '0',
         maxValue: '100',
@@ -25,7 +25,7 @@ const sensors = [
     { 
         label: 'Carbon Monoxide', 
         icon: carbonMonoxide, 
-        value: '61', 
+        value: '26', 
         unit: 'ppm', // Parts per million
         minValue: '0',
         maxValue: '100',
@@ -33,26 +33,26 @@ const sensors = [
     { 
         label: 'Carbon Dioxide', 
         icon: carbonDioxide, 
-        value: '45', 
+        value: '3022', 
         unit: 'ppm', // Parts per million
         minValue: '0',
-        maxValue: '100',
+        maxValue: '5000',
     },
     { 
         label: 'Butane', 
         icon: butane, 
-        value: '53', 
+        value: '1350', 
         unit: 'ppm', // Parts per million
         minValue: '0',
-        maxValue: '100',
+        maxValue: '5000',
     },
     { 
         label: 'Propane', 
         icon: propane, 
-        value: '86', 
+        value: '4389', 
         unit: 'ppm', // Parts per million
         minValue: '0',
-        maxValue: '100',
+        maxValue: '5000',
     },
 ];
 

@@ -23,11 +23,19 @@ const Profile = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10 bg-white p-8 rounded-lg shadow-lg">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">Profile Settings</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+    <div className="max-w-md mx-auto mt-10 p-8 rounded-xl shadow-lg bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 text-white">
+      <h2 className="text-4xl font-extrabold mb-6 text-center text-teal-400">
+        Profile Settings
+      </h2>
+      <p className="text-gray-300 text-center mb-8">
+        Update your account information below.
+      </p>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div>
+          <label
+            className="block text-sm font-semibold text-teal-300 mb-1"
+            htmlFor="username"
+          >
             Username
           </label>
           <input
@@ -36,11 +44,15 @@ const Profile = () => {
             name="username"
             value={formData.username}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Enter your username"
+            className="w-full py-3 px-4 rounded-lg bg-gray-700 text-gray-200 focus:ring-2 focus:ring-teal-400 focus:outline-none"
           />
         </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+        <div>
+          <label
+            className="block text-sm font-semibold text-teal-300 mb-1"
+            htmlFor="email"
+          >
             Email
           </label>
           <input
@@ -49,43 +61,52 @@ const Profile = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Enter your email address"
+            className="w-full py-3 px-4 rounded-lg bg-gray-700 text-gray-200 focus:ring-2 focus:ring-teal-400 focus:outline-none"
           />
         </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label
+              className="block text-sm font-semibold text-teal-300 mb-1"
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your password"
+              className="w-full py-3 px-4 rounded-lg bg-gray-700 text-gray-200 focus:ring-2 focus:ring-teal-400 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label
+              className="block text-sm font-semibold text-teal-300 mb-1"
+              htmlFor="confirmPassword"
+            >
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              placeholder="Re-enter your password"
+              className="w-full py-3 px-4 rounded-lg bg-gray-700 text-gray-200 focus:ring-2 focus:ring-teal-400 focus:outline-none"
+            />
+          </div>
         </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <div className="flex items-center justify-between">
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Save Changes
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="w-full py-3 rounded-lg bg-teal-500 text-white font-semibold hover:bg-teal-600 focus:ring-4 focus:ring-teal-400 focus:outline-none transition-all"
+        >
+          Save Changes
+        </button>
       </form>
     </div>
   );

@@ -7,7 +7,7 @@ const SensorCard = ({ label, icon, value, unit, minValue, maxValue }) => (
       <img src={icon} alt={label} className="w-6 sm:w-8 md:w-8 lg:w-10 xl:w-10 opacity-75" />
       <div className="ml-2 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium text-gray-600">{label}</div>
     </div>
-    <ProgressBar value={value} unit={unit} minValue={minValue} maxValue={maxValue} />
+    <ProgressBar label={label} value={value} unit={unit} minValue={minValue} maxValue={maxValue} />
   </div>
 );
 

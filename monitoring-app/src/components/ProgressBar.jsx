@@ -1,8 +1,54 @@
 import React from 'react';
 
-const ProgressBar = ({ value, unit, minValue, maxValue }) => {
+const ProgressBar = ({ label, value, unit, minValue, maxValue }) => {
   // Calculate progress percentage
-  const progress = ((value - minValue) / (maxValue - minValue)) * 100;
+  const progress = Math.min(((value - minValue) / (maxValue - minValue)) * 100, 100);
+
+  // Determine the color based on the label and value
+  const getColor = () => {
+    switch (label) {
+      case 'Temperature':
+        if (value >= 20 && value <= 25) return 'green';
+        if (value >= 26 && value <= 30) return 'yellow';
+        if (value >= 31 && value <= 35) return 'orange';
+        if (value > 35) return 'red';
+        break;
+      case 'Humidity':
+        if (value >= 30 && value <= 50) return 'green';
+        if (value >= 51 && value <= 60) return 'yellow';
+        if (value >= 61 && value <= 70) return 'orange';
+        if (value > 70) return 'red';
+        break;
+      case 'Carbon Monoxide':
+        if (value >= 0 && value <= 9) return 'green';
+        if (value >= 10 && value <= 35) return 'yellow';
+        if (value >= 36 && value <= 100) return 'orange';
+        if (value > 100) return 'red';
+        break;
+      case 'Carbon Dioxide':
+        if (value >= 400 && value <= 1000) return 'green';
+        if (value >= 1001 && value <= 2000) return 'yellow';
+        if (value >= 2001 && value <= 5000) return 'orange';
+        if (value > 5000) return 'red';
+        break;
+      case 'Butane':
+        if (value >= 0 && value <= 800) return 'green';
+        if (value >= 801 && value <= 1600) return 'yellow';
+        if (value >= 1601 && value <= 5000) return 'orange';
+        if (value > 5000) return 'red';
+        break;
+      case 'Propane':
+        if (value >= 0 && value <= 800) return 'green';
+        if (value >= 801 && value <= 1600) return 'yellow';
+        if (value >= 1601 && value <= 5000) return 'orange';
+        if (value > 5000) return 'red';
+        break;
+      default:
+        return 'blue'; // Default color if no conditions match
+    }
+  };
+
+  const color = getColor();
 
   return (
     <div className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl">
@@ -26,9 +72,10 @@ const ProgressBar = ({ value, unit, minValue, maxValue }) => {
           <path
             d="M 10,50 A 40,40 0 0,1 90,50"
             fill="none"
-            stroke="#3B82F6"
+            stroke={color}
             strokeWidth="10"
-            strokeDasharray={`${progress}, 100`}
+            strokeDasharray={`calc(${progress} * 1.25) 125`}
+            strokeDashoffset="0"
             strokeLinecap="round"
           />
         </svg>
