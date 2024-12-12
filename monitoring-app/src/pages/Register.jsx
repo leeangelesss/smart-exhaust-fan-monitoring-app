@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { supabase } from "../utils/supabase"; // Ensure this path is correct
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -11,15 +12,34 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-    console.log({ email, password });
-    alert("Registration successful!");
-    navigate("/login"); // Redirect to login after registration
+
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: "http://localhost:5173/home",
+        },
+      });
+
+      if (error) {
+        console.error("Error signing up:", error.message);
+        alert(`Error: ${error.message}`);
+      } else {
+        alert("Registration successful! Check your email for confirmation.");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      alert("An unexpected error occurred. Please try again later.");
+    }
   };
 
   const togglePasswordVisibility = () => {

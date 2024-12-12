@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { supabase } from "../utils/supabase"; // Ensure this path is correct
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -9,28 +10,40 @@ const Login = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (email === "user@example.com" && password === "password") {
-      onLogin(); // Update authentication state
-      navigate("/home"); // Redirect to the main app
-    } else {
-      alert("Invalid credentials");
+  
+    try {
+      // Use the email and password from state
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+  
+      if (error) {
+        alert(error.message); // Alert the user
+        console.error("Login error:", error.message); // Log the error to the console
+      } else {
+        onLogin(); // Update authentication state
+        navigate("/home"); // Redirect to the main app
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err); // Catch unexpected errors
     }
-  };
+  };  
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+    setShowPassword((prev) => !prev);
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-[linear-gradient(to_bottom_right,_#020024_0%,_#090979_50%,_#0648a3_75%,_#00d4ff_100%)]">
-    {/* Glassmorphism Container */}
+      {/* Glassmorphism Container */}
       <div className="w-full max-w-md p-10 bg-black bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center mb-6 text-teal-400">
           Login
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleLogin} className="space-y-6">
           {/* Email Field */}
           <div className="relative">
             <label htmlFor="email" className="block text-base font-medium text-teal-400">
@@ -87,7 +100,7 @@ const Login = ({ onLogin }) => {
 
         {/* Register Link */}
         <p className="mt-6 text-md text-center text-white tracking-wide">
-          Already have an account?{" "}
+          Don't have an account?{" "}
           <button
             className="text-teal-500 hover:underline"
             onClick={() => navigate("/register")}
