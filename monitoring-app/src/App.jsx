@@ -1,53 +1,57 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Logo from './components/Logo';
-import DateTime from './components/DateTime';
-import Legend from './components/Legend';
-import UserContainer from './components/UserContainer';
-import SensorCard from './components/SensorCard';
-import Profile from './pages/profile'; // Ensure this path is correct
-import sensors from '../sensorsData'; // Ensure this path is correct
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
+import { supabase } from "./utils/supabase"; // Ensure correct path
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
 
-const App = () => {
+export default function App() {
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    // Fetch the current session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Listen for session changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    // Cleanup subscription on unmount
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const handleLogin = () => {
+    console.log("User logged in");
+  };
+
+  // Show authentication UI if not logged in
+  if (!session) {
+    return (
+      <Auth
+        supabaseClient={supabase}
+        appearance={{ theme: ThemeSupa }}
+      />
+    );
+  }
+
+  // Render app routes when logged in
   return (
-    <div className="min-h-screen bg-slate-900 text-white font-sans">
-      <header className="flex items-center justify-between px-4">
-        <Logo />
-        <div className="flex items-center gap-2">
-          <DateTime />
-          <UserContainer />
-        </div>
-      </header>
-
-      <main className="p-4 mx-[5%]">
-        <Routes>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/" element={
-            <>
-              <Legend />
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {sensors.map((sensor) => (
-                  <SensorCard
-                    key={sensor.label}
-                    label={sensor.label}
-                    icon={sensor.icon}
-                    value={sensor.value}
-                    unit={sensor.unit}
-                    minValue={sensor.minValue}
-                    maxValue={sensor.maxValue}  
-                  />
-                ))}
-              </div>
-            </>
-          } />
-        </Routes>
-      </main>
-
-      <footer className="p-4 flex justify-between items-center">
-        <div className="rounded-full bg-yellow-500 p-2">⚠️</div>
-      </footer>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Register onLogin={handleLogin} />} />
+        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/home" element={<Home />} />
+      </Routes>
+    </Router>
   );
-};
-
-export default App;
+}
