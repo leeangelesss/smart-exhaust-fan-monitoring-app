@@ -37,7 +37,7 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[linear-gradient(to_bottom_right,_#020024_0%,_#090979_50%,_#0648a3_75%,_#00d4ff_100%)]">
+    <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white font-sans">
       {/* Glassmorphism Container */}
       <div className="w-full max-w-md p-10 bg-black bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center mb-6 text-teal-400">

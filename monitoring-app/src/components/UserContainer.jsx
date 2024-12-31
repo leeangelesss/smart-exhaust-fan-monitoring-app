@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const UserContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -13,6 +14,18 @@ const UserContainer = () => {
     // Close the dropdown menu when the route changes
     setIsOpen(false);
   }, [location]);
+
+  const handleLogout = () => {
+    // Clear any authentication tokens or session data here
+    // For example, if using supabase:
+    // await supabase.auth.signOut();
+
+    // Show logout success message
+    alert('Logout successfully');
+
+    // Redirect to login page
+    navigate('/login');
+  };
 
   return (
     <div className="relative">
@@ -61,12 +74,12 @@ const UserContainer = () => {
           >
             Profile Settings
           </Link>
-          <a
-            href="/logout"
-            className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+          <button
+            onClick={handleLogout}
+            className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200"
           >
             Logout
-          </a>
+          </button>
         </div>
       )}
     </div>

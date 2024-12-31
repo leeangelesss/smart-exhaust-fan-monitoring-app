@@ -5,3 +5,4 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 // Named export
 export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabaseKeyExport = supabaseKey; // Export the supabaseKey

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faEye, faEyeSlash, faPhone, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { supabase } from "../utils/supabase"; // Ensure this path is correct
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
@@ -29,18 +31,35 @@ const Register = () => {
         },
       });
 
+
       if (error) {
         console.error("Error signing up:", error.message);
         alert(`Error: ${error.message}`);
       } else {
-        alert("Registration successful! Check your email for confirmation.");
-        navigate("/login");
+        // Insert additional user information into the 'users' table
+        const { user } = data;
+        console.log(data);
+        const { error: insertError } = await supabase
+          .from('users')
+          .insert([
+            {email, address, phone_number: phoneNumber, auth_uid: user.user_metadata.sub},
+          ]);
+
+        if (insertError) {
+          console.error("Error inserting user information:", insertError.message);
+          alert(`Error: ${insertError.message}`);
+        } else {
+          alert("Registration successful! Check your email for confirmation.");
+          navigate("/login");
+        }
       }
     } catch (error) {
       console.error("Unexpected error:", error);
       alert("An unexpected error occurred. Please try again later.");
     }
   };
+
+
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -51,7 +70,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[linear-gradient(to_bottom_right,_#020024_0%,_#090979_50%,_#0648a3_75%,_#00d4ff_100%)]">
+    <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white font-sans">
       {/* Glassmorphism Container */}
       <div className="w-full max-w-md p-10 bg-black bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center mb-6 text-teal-400">Register</h2>
@@ -120,6 +139,48 @@ const Register = () => {
                 placeholder="Re-enter your password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+
+          {/* Address Field */}
+          <div className="relative">
+            <label htmlFor="address" className="block text-base font-semibold text-teal-400">
+              Address
+            </label>
+            <div className="flex items-center mt-2">
+              <span className="absolute right-4 text-gray-300">
+                <FontAwesomeIcon icon={faMapMarkerAlt} />
+              </span>
+              <input
+                type="text"
+                id="address"
+                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
+                placeholder="Enter your address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+
+          {/* Phone Number Field */}
+          <div className="relative">
+            <label htmlFor="phoneNumber" className="block text-base font-semibold text-teal-400">
+              Phone Number
+            </label>
+            <div className="flex items-center mt-2">
+              <span className="absolute right-4 text-gray-300">
+                <FontAwesomeIcon icon={faPhone} />
+              </span>
+              <input
+                type="text"
+                id="phoneNumber"
+                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
+                placeholder="Enter your phone number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 required
               />
             </div>

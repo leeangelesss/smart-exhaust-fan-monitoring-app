@@ -4,12 +4,11 @@ import DateTime from './../components/DateTime';
 import Legend from './../components/Legend';
 import UserContainer from './../components/UserContainer';
 import SensorCard from './../components/SensorCard';
-import DarkModeToggle from './../components/DarkModeToggle';
 import sensors from '../../sensorsData'; // Import sensors array
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 text-black dark:text-white font-sans ">
+    <div className="min-h-screen bg-slate-900 text-white font-sans">
       <header className="flex items-center justify-between px-4">
         <Logo />
         <div className="flex items-center gap-2">
@@ -36,7 +35,6 @@ const Home = () => {
       </main>
 
       <footer className="p-4 flex justify-between items-center">
-        <DarkModeToggle />
         <div className="rounded-full bg-yellow-500 p-2">⚠️</div>
       </footer>
     </div>
