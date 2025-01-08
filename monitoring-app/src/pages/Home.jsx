@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from './../components/Logo';
+import Logo from '../components/Logo';
 import DateTime from './../components/DateTime';
 import Legend from './../components/Legend';
 import UserContainer from './../components/UserContainer';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Logo from './../components/Logo';
+import Logo from '../components/Logo';
 import DateTime from './../components/DateTime';
 import UserContainer from './../components/UserContainer';
 import { supabase, supabaseKeyExport } from '../utils/supabase'; // Import supabase and supabaseKeyExport
