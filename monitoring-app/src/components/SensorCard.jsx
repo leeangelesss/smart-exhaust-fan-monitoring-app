@@ -1,13 +1,21 @@
 import React from 'react';
-import ProgressBar from './ProgressBar';
+import SensorProgressBar from './SensorProgressBar';
 
-const SensorCard = ({ label, icon, value, unit, minValue, maxValue }) => (
-  <div className="bg-[#EFEFFF] rounded-lg shadow-md p-3 sm:p-4 md:p-4 lg:p-5 xl:p-5 mx-auto flex flex-col items-center justify-center w-full max-w-xs sm:max-w-xs md:max-w-sm lg:max-w-sm xl:max-w-md">
+const SensorCard = ({ label, icon, sensorName, sensorId, unit, minValue, maxValue, value, lastUpdate }) => (
+  <div className="bg-[#EFEFFF] rounded-lg shadow-md p-4 mx-auto flex flex-col items-center justify-center w-full max-w-xs">
     <div className="flex items-center justify-between w-full mb-4">
-      <img src={icon} alt={label} className="w-6 sm:w-8 md:w-8 lg:w-10 xl:w-10 opacity-75" />
-      <div className="ml-2 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-medium text-gray-600">{label}</div>
+      <img src={icon} alt={label} className="w-4 sm:w-5 md:w-6 lg:w-7 opacity-75" />
+      <div className="ml-2 text-md sm:text-sm md:text-md lg:text-lg font-medium text-gray-600">{label}</div>
     </div>
-    <ProgressBar label={label} value={value} unit={unit} minValue={minValue} maxValue={maxValue} />
+    <SensorProgressBar
+      sensorName={sensorName}
+      sensorId={sensorId}
+      unit={unit}
+      minValue={minValue}
+      maxValue={maxValue}
+      value={value}
+      lastUpdate={lastUpdate}
+    />
   </div>
 );
 

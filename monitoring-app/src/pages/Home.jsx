@@ -3,8 +3,102 @@ import Logo from './../components/Logo';
 import DateTime from './../components/DateTime';
 import Legend from './../components/Legend';
 import UserContainer from './../components/UserContainer';
-import SensorCard from './../components/SensorCard';
-import sensors from '../../sensorsData'; // Import sensors array
+import SensorCard from '../components/SensorCard';
+import SensorDashboard from '../components/SensorDashboard';
+
+import temperature from '/images/sensorIcons/temperature.png';
+import humidity from '/images/sensorIcons/humidity.png';
+import carbonMonoxide from '/images/sensorIcons/carbonMonoxide.png';
+import carbonDioxide from '/images/sensorIcons/carbonDioxide.png';
+import butane from '/images/sensorIcons/butane.png';
+import propane from '/images/sensorIcons/propane.png';
+
+const sensors = [
+  {
+    sensorName: 'Temperature',
+    component: (
+      <SensorCard
+        label="Temperature"
+        sensorName="Temperature"
+        sensorId="Temperature"
+        icon={temperature}
+        unit="°C"
+        minValue={0}
+        maxValue={50}
+      />
+    ),
+  },
+  {
+    sensorName: 'Humidity',
+    component: (
+      <SensorCard
+        label="Humidity"
+        sensorName="Humidity"
+        sensorId="Humidity"
+        icon={humidity}
+        unit="%"
+        minValue={0}
+        maxValue={100}
+      />
+    ),
+  },
+  {
+    sensorName: 'Smoke',
+    component: (
+      <SensorCard
+        label="Smoke"
+        sensorName="Smoke"
+        sensorId="Smoke"
+        icon={carbonMonoxide}
+        unit="ppm"
+        minValue={0}
+        maxValue={5000}
+      />
+    ),
+  },
+  {
+    sensorName: 'Air Quality',
+    component: (
+      <SensorCard
+        label="Air Quality"
+        sensorName="Air Quality"
+        sensorId="Air Quality"
+        icon={carbonDioxide}
+        unit="ppm"
+        minValue={0}
+        maxValue={300}
+      />
+    ),
+  },
+  {
+    sensorName: 'Kerosene',
+    component: (
+      <SensorCard
+        label="Kerosene"
+        sensorName="Kerosene"
+        sensorId="Kerosene"
+        icon={butane}
+        unit="ppm"
+        minValue={0}
+        maxValue={5000}
+      />
+    ),
+  },
+  {
+    sensorName: 'LPG',
+    component: (
+      <SensorCard
+        label="LPG"
+        sensorName="LPG"
+        sensorId="LPG"
+        icon={propane}
+        unit="ppm"
+        minValue={0}
+        maxValue={5000}
+      />
+    ),
+  },
+];
 
 const Home = () => {
   return (
@@ -17,21 +111,9 @@ const Home = () => {
         </div>
       </header>
 
-      <main className="p-4 mx-[5%]">
+      <main className="p-4 mx-[5%] flex flex-col items-center justify-center min-h-screen">
         <Legend />
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {sensors.map((sensor) => (
-            <SensorCard
-              key={sensor.label}
-              label={sensor.label}
-              icon={sensor.icon}
-              value={sensor.value}
-              unit={sensor.unit}
-              minValue={sensor.minValue}
-              maxValue={sensor.maxValue}  
-            />
-          ))}
-        </div>
+        <SensorDashboard sensors={sensors} />
       </main>
 
       <footer className="p-4 flex justify-between items-center">
