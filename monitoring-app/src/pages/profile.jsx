@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Logo from '../components/Logo';
+import Badge from '../components/Badge';
 import DateTime from './../components/DateTime';
 import UserContainer from './../components/UserContainer';
 import { supabase, supabaseKeyExport } from '../utils/supabase'; // Import supabase and supabaseKeyExport
@@ -75,7 +75,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-slate-900 text-white font-sans">
       <header className="flex items-center justify-between px-4">
-        <Logo />
+        <Badge />
         <div className="flex items-center gap-2">
           <DateTime />
           <UserContainer />

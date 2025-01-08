@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../components/Logo';
+import Badge from '../components/Badge';
 import DateTime from './../components/DateTime';
 import Legend from './../components/Legend';
 import UserContainer from './../components/UserContainer';
@@ -104,7 +104,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-slate-900 text-white font-sans">
       <header className="flex items-center justify-between px-4">
-        <Logo />
+        <Badge />
         <div className="flex items-center gap-2">
           <DateTime />
           <UserContainer />
