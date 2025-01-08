@@ -8,6 +8,9 @@
           "distDir": "dist"
         }
       }
+    ],
+    "rewrites":  [
+      {"source": "/(.*)", "destination": "/"}
     ]
   }
   
