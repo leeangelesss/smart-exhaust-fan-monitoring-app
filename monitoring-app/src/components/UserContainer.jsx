@@ -19,10 +19,6 @@ const UserContainer = () => {
     // Clear any authentication tokens or session data here
     // For example, if using supabase:
     // await supabase.auth.signOut();
-
-    // Show logout success message
-    alert('Logout successfully');
-
     // Redirect to login page
     navigate('/login');
   };

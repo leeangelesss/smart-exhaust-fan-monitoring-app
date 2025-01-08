@@ -5,6 +5,8 @@ import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Profile from "./pages/profile";
 import { supabase } from "./utils/supabase"; // Ensure correct path
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -32,15 +34,13 @@ export default function App() {
     console.log("User logged in");
   };
 
-  // Show your custom Login component if not logged in
+  // Show authentication UI if not logged in
   if (!session) {
     return (
-      <Router>
-        <Routes>
-          <Route path="/" element={<Login onLogin={handleLogin} />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </Router>
+      <Auth
+        supabaseClient={supabase}
+        appearance={{ theme: ThemeSupa }}
+      />
     );
   }
 
@@ -48,7 +48,9 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login onLogin={handleLogin} />} />
+        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>

@@ -43,20 +43,6 @@ const sensors = [
     ),
   },
   {
-    sensorName: 'Smoke',
-    component: (
-      <SensorCard
-        label="Smoke"
-        sensorName="Smoke"
-        sensorId="Smoke"
-        icon={carbonMonoxide}
-        unit="ppm"
-        minValue={0}
-        maxValue={5000}
-      />
-    ),
-  },
-  {
     sensorName: 'Air Quality',
     component: (
       <SensorCard
@@ -67,6 +53,20 @@ const sensors = [
         unit="ppm"
         minValue={0}
         maxValue={300}
+      />
+    ),
+  },
+  {
+    sensorName: 'Smoke',
+    component: (
+      <SensorCard
+        label="Smoke"
+        sensorName="Smoke"
+        sensorId="Smoke"
+        icon={carbonMonoxide}
+        unit="ppm"
+        minValue={0}
+        maxValue={5000}
       />
     ),
   },
