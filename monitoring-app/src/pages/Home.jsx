@@ -52,7 +52,7 @@ const sensors = [
         icon={carbonDioxide}
         unit="ppm"
         minValue={0}
-        maxValue={300}
+        maxValue={500}
       />
     ),
   },
@@ -66,7 +66,7 @@ const sensors = [
         icon={carbonMonoxide}
         unit="ppm"
         minValue={0}
-        maxValue={5000}
+        maxValue={10000}
       />
     ),
   },
@@ -80,7 +80,7 @@ const sensors = [
         icon={butane}
         unit="ppm"
         minValue={0}
-        maxValue={5000}
+        maxValue={1200}
       />
     ),
   },
@@ -94,7 +94,7 @@ const sensors = [
         icon={propane}
         unit="ppm"
         minValue={0}
-        maxValue={5000}
+        maxValue={15000}
       />
     ),
   },

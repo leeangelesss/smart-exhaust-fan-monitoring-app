@@ -35,39 +35,39 @@ const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorNa
   const getSensorStat = (sensorName, value) => {
     switch (sensorName) {
       case 'Temperature':
-        if (value >= 20 && value <= 30) return 'good';   // Good temperature range for example
-        if (value >= 30) return 'caution';                // Caution temperature range
-        if (value >= 35) return 'danger'; 
+        if (value >= 20 && value <= 32) return 'good';   // Good temperature range for example
+        if (value <= 41) return 'caution';                // Caution temperature range
+        if (value <= 51) return 'danger'; 
         return 'critical';                                 // Danger if it's above 30
 
       case 'Humidity':
-        if (value <= 30) return 'critical';                // Bad humidity if it's too low
-        if (value <= 50) return 'danger';                  // Good humidity if it's high
-        if (value <= 70) return 'caution'; 
+        if (value >= 76 && value <= 90) return 'critical';                // Bad humidity if it's too low
+        if (value >= 65 && value <= 75) return 'danger';                  // Good humidity if it's high
+        if (value >= 20 && value <= 39) return 'caution'; 
         return 'good';                                // Caution if it's in the middle range
 
       case 'Smoke':
-        if (value <= 100) return 'good';                  // Good smoke level
-        if (value <= 200) return 'caution';              // Caution smoke level
-        if (value <= 400) return 'danger'; 
+        if (value <= 2500) return 'good';                  // Good smoke level
+        if (value <= 5000) return 'caution';              // Caution smoke level
+        if (value <= 7500) return 'danger'; 
         return 'critical';                                 // Dangerous smoke level
 
       case 'Air Quality':
-        if (value <= 50) return 'good';                  // Good air quality
-        if (value <= 100) return 'caution';              // Moderate air quality
-        if (value <= 200) return 'danger'; 
+        if (value <= 100) return 'good';                  // Good air quality
+        if (value <= 200) return 'caution';              // Moderate air quality
+        if (value <= 300) return 'danger'; 
         return 'critical';                                 // Poor air quality
 
       case 'Kerosene':
-        if (value <= 50) return 'good';                  // Safe kerosene level
-        if (value <= 100) return 'caution'; 
-        if (value <= 200) return 'danger';              // Caution kerosene level
+        if (value <= 200) return 'good';                  // Safe kerosene level
+        if (value <= 500) return 'caution'; 
+        if (value <= 1000) return 'danger';              // Caution kerosene level
         return 'critical';                                 // Dangerous kerosene level
 
       case 'LPG':
-        if (value <= 200) return 'good';                 // Safe LPG level
-        if (value <= 400) return 'caution';              // Caution LPG level
-        if (value <= 800) return 'danger';              // Caution kerosene level
+        if (value <= 1000) return 'good';                 // Safe LPG level
+        if (value <= 5000) return 'caution';              // Caution LPG level
+        if (value <= 10000) return 'danger';              // Caution kerosene level
         return 'critical';                                 // Dangerous LPG level
 
       default:

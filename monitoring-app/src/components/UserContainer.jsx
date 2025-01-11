@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { supabase } from '../utils/supabase';
 
 const UserContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,12 +16,20 @@ const UserContainer = () => {
     setIsOpen(false);
   }, [location]);
 
-  const handleLogout = () => {
-    // Clear any authentication tokens or session data here
-    // For example, if using supabase:
-    // await supabase.auth.signOut();
-    // Redirect to login page
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error('Error during sign-out:', error.message);
+        alert('An error occurred while logging out. Please try again.');
+        return;
+      }
+      // Replace current history state to prevent navigation back to the previous authenticated pages
+      navigate('/login', { replace: true });
+    } catch (error) {
+      console.error('Unexpected error during sign-out:', error);
+      alert('An unexpected error occurred. Please try again.');
+    }
   };
 
   return (
@@ -75,7 +84,7 @@ const UserContainer = () => {
             className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200"
           >
             Logout
-          </button>
+          </button> 
         </div>
       )}
     </div>
