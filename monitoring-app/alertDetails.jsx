@@ -130,7 +130,7 @@ const alertDetails = {
     },
     AirQuality: {
       Caution: {
-        title: "Air Quality Index (AQI) Levels",
+        title: "Air Quality Levels",
         effects: [
           "General public and sensitive individuals may experience irritation and respiratory issues."
         ],
@@ -140,7 +140,7 @@ const alertDetails = {
         ]
       },
       Danger: {
-        title: "Air Quality Index (AQI) Levels",
+        title: "Air Quality Levels",
         effects: [
           "Health effects become noticeable for the general public, with severe irritation for sensitive groups."
         ],
@@ -150,7 +150,7 @@ const alertDetails = {
         ]
       },
       Critical: {
-        title: "Air Quality Index (AQI) Levels",
+        title: "Air Quality Levels",
         effects: [
           "High risk of adverse effects for everyone, including strong irritations and severe health hazards."
         ],
