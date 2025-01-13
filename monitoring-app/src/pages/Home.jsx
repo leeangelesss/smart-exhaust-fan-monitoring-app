@@ -5,6 +5,8 @@ import Legend from './../components/Legend';
 import UserContainer from './../components/UserContainer';
 import SensorCard from '../components/SensorCard';
 import SensorDashboard from '../components/SensorDashboard';
+import Notification from '../components/Notification';
+import Information from '../components/Information';
 
 import temperature from '/images/sensorIcons/temperature.png';
 import humidity from '/images/sensorIcons/humidity.png';
@@ -12,6 +14,7 @@ import carbonMonoxide from '/images/sensorIcons/carbonMonoxide.png';
 import carbonDioxide from '/images/sensorIcons/carbonDioxide.png';
 import butane from '/images/sensorIcons/butane.png';
 import propane from '/images/sensorIcons/propane.png';
+
 
 const sensors = [
   {
@@ -43,12 +46,12 @@ const sensors = [
     ),
   },
   {
-    sensorName: 'Air Quality',
+    sensorName: 'AirQuality',
     component: (
       <SensorCard
         label="Air Quality"
-        sensorName="Air Quality"
-        sensorId="Air Quality"
+        sensorName="AirQuality"
+        sensorId="AirQuality"
         icon={carbonDioxide}
         unit="ppm"
         minValue={0}
@@ -116,11 +119,19 @@ const Home = () => {
         <SensorDashboard sensors={sensors} />
       </main>
 
-      <footer className="p-4 flex justify-between items-center">
-        <div className="rounded-full bg-yellow-500 p-2">⚠️</div>
+      <footer className="fixed bottom-0 w-full p-4" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <div className='block'>
+          <div className="mb-4">
+            <Notification sensors={sensors} />
+          </div>
+          <div>
+            <Information />
+          </div>
+        </div>
       </footer>
+
     </div>
   );
 };
-
+ 
 export default Home;

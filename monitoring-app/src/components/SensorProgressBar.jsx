@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../utils/supabase';
 
-const supabaseUrl = 'https://your-supabase-url.supabase.co'; // Replace with your Supabase URL
-const supabaseKey = 'your-supabase-anon-key'; // Replace with your Supabase anon key
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorName }) => {
   const [lastUpdate, setLastUpdate] = useState(null);
@@ -52,7 +49,7 @@ const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorNa
         if (value <= 7500) return 'danger'; 
         return 'critical';                                 // Dangerous smoke level
 
-      case 'Air Quality':
+      case 'AirQuality':
         if (value <= 100) return 'good';                  // Good air quality
         if (value <= 200) return 'caution';              // Moderate air quality
         if (value <= 300) return 'danger'; 
