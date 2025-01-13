@@ -86,7 +86,7 @@ const Notification = () => {
           </div>
         )}
         <div
-          className="rounded-full bg-gray-200 p-2 cursor-pointer w-12 h-12 flex justify-center items-center m-5"
+          className="rounded-full bg-gray-300 p-2 cursor-pointer w-12 h-12 flex justify-center items-center m-5 shadow-lg"
           onClick={handleToggleModal}
           role="button"
           aria-label="Show Notification"
@@ -99,7 +99,7 @@ const Notification = () => {
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 text-black">
           <div className="bg-white rounded-lg p-6 w-96 relative">
-            <h2 className="text-lg font-semibold mb-4">Notifications</h2>
+            <h2 className="text-lg sm:text-sm md:text-md lg:text-lg font-semibold mb-4">Notifications</h2>
 
             {/* Alert Cards */}
             {alertData.length > 0 ? (
@@ -131,7 +131,7 @@ const Notification = () => {
                     onClick={() => toggleAlertDetails(index)}
                   >
                     <div className="flex justify-between items-center">
-                      <h3 className="text-lg font-bold">
+                      <h3 className="text-lg sm:text-sm md:text-md lg:text-lg font-bold">
                         {alert.sensor_stat} - {details?.title || alert.sensor_name}
                       </h3>
                       <FontAwesomeIcon
