@@ -67,7 +67,7 @@ const Information = () => {
             {/* Close Button */}
             <button
               onClick={toggleModal}
-              className="absolute top-3 right-3 text-gray-600 hover:text-gray-800"
+              className="absolute top-3 right-6 text-gray-600 hover:text-gray-800"
               aria-label="Close"
             >
               <FontAwesomeIcon icon={faTimes} className="text-2xl" />

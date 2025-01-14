@@ -7,13 +7,14 @@ import SensorCard from '../components/SensorCard';
 import SensorDashboard from '../components/SensorDashboard';
 import Notification from '../components/Notification';
 import Information from '../components/Information';
+import LastUpdateDate from '../components/LastUpdateDate';
 
 import temperature from '/images/sensorIcons/temperature.png';
 import humidity from '/images/sensorIcons/humidity.png';
-import carbonMonoxide from '/images/sensorIcons/carbonMonoxide.png';
-import carbonDioxide from '/images/sensorIcons/carbonDioxide.png';
-import butane from '/images/sensorIcons/butane.png';
-import propane from '/images/sensorIcons/propane.png';
+import airquality from '/images/sensorIcons/airquality.png';
+import smoke from '/images/sensorIcons/smoke.png';
+import kerosene from '/images/sensorIcons/kerosene.png';
+import lpg from '/images/sensorIcons/lpg.png';
 
 
 const sensors = [
@@ -52,7 +53,7 @@ const sensors = [
         label="Air Quality"
         sensorName="AirQuality"
         sensorId="AirQuality"
-        icon={carbonDioxide}
+        icon={airquality}
         unit="ppm"
         minValue={0}
         maxValue={500}
@@ -66,7 +67,7 @@ const sensors = [
         label="Smoke"
         sensorName="Smoke"
         sensorId="Smoke"
-        icon={carbonMonoxide}
+        icon={smoke}
         unit="ppm"
         minValue={0}
         maxValue={10000}
@@ -80,7 +81,7 @@ const sensors = [
         label="Kerosene"
         sensorName="Kerosene"
         sensorId="Kerosene"
-        icon={butane}
+        icon={kerosene}
         unit="ppm"
         minValue={0}
         maxValue={1200}
@@ -94,7 +95,7 @@ const sensors = [
         label="LPG"
         sensorName="LPG"
         sensorId="LPG"
-        icon={propane}
+        icon={lpg}
         unit="ppm"
         minValue={0}
         maxValue={15000}
@@ -116,6 +117,7 @@ const Home = () => {
 
       <main className="p-4 mx-[5%] flex flex-col items-center justify-center min-h-screen">
         <Legend />
+        <LastUpdateDate lastUpdate={new Date()} />
         <SensorDashboard sensors={sensors} />
       </main>
 

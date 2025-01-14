@@ -133,7 +133,7 @@ const alertDetails = {
         title: "Air Quality Levels",
         effects: [
           "General public and sensitive individuals may experience irritation and respiratory issues."
-        ],
+        ], 
         guidelines: [
           "Limit outdoor activities, especially for children and the elderly.",
           "Keep windows closed and use air purifiers indoors."

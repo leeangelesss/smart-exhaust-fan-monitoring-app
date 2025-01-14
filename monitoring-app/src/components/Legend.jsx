@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Legend = () => (
-  <div className="flex flex-wrap items-center justify-center mb-6 bg-[#172939] bg-opacity-99 p-4 rounded-lg text-white w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
+  <div className="flex flex-wrap items-center justify-center bg-[#172939] bg-opacity-99 p-4 rounded-lg text-white w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
     <div className="flex flex-col sm:flex-row items-center mx-2 my-2">
       <div className="flex items-center mx-2 my-2">
         <span className="bg-green-500 w-4 h-4 sm:w-6 sm:h-6 rounded-full inline-block mr-2"></span> 

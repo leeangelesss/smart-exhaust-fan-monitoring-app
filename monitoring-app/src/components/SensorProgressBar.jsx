@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../utils/supabase';
 
-
 const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorName }) => {
   const [lastUpdate, setLastUpdate] = useState(null);
 
   useEffect(() => {
-    // Fetch last update from Supabase (if needed)
+    // Fetch last update from Supabase
     const fetchSensorData = async () => {
       try {
         const { data, error } = await supabase
           .from('sensor_data')
           .select('last_update')
-          .eq('id', sensorId) // Use sensorId to filter for the specific sensor
+          .eq('id', sensorId)
           .single();
 
         if (error) throw error;
@@ -28,70 +27,57 @@ const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorNa
     fetchSensorData();
   }, [sensorId]);
 
-  // Determine the sensor status based on value
   const getSensorStat = (sensorName, value) => {
     switch (sensorName) {
       case 'Temperature':
-        if (value >= 20 && value <= 32) return 'good';   // Good temperature range for example
-        if (value <= 41) return 'caution';                // Caution temperature range
-        if (value <= 51) return 'danger'; 
-        return 'critical';                                 // Danger if it's above 30
-
+        if (value >= 20 && value <= 32) return 'good';
+        if (value <= 41) return 'caution';
+        if (value <= 51) return 'danger';
+        return 'critical';
       case 'Humidity':
-        if (value >= 76 && value <= 90) return 'critical';                // Bad humidity if it's too low
-        if (value >= 65 && value <= 75) return 'danger';                  // Good humidity if it's high
-        if (value >= 20 && value <= 39) return 'caution'; 
-        return 'good';                                // Caution if it's in the middle range
-
+        if (value >= 76 && value <= 90) return 'critical';
+        if (value >= 65 && value <= 75) return 'danger';
+        if (value >= 20 && value <= 39) return 'caution';
+        return 'good';
       case 'Smoke':
-        if (value <= 2500) return 'good';                  // Good smoke level
-        if (value <= 5000) return 'caution';              // Caution smoke level
-        if (value <= 7500) return 'danger'; 
-        return 'critical';                                 // Dangerous smoke level
-
+        if (value <= 2500) return 'good';
+        if (value <= 5000) return 'caution';
+        if (value <= 7500) return 'danger';
+        return 'critical';
       case 'AirQuality':
-        if (value <= 100) return 'good';                  // Good air quality
-        if (value <= 200) return 'caution';              // Moderate air quality
-        if (value <= 300) return 'danger'; 
-        return 'critical';                                 // Poor air quality
-
+        if (value <= 100) return 'good';
+        if (value <= 200) return 'caution';
+        if (value <= 300) return 'danger';
+        return 'critical';
       case 'Kerosene':
-        if (value <= 200) return 'good';                  // Safe kerosene level
-        if (value <= 500) return 'caution'; 
-        if (value <= 1000) return 'danger';              // Caution kerosene level
-        return 'critical';                                 // Dangerous kerosene level
-
+        if (value <= 200) return 'good';
+        if (value <= 500) return 'caution';
+        if (value <= 1000) return 'danger';
+        return 'critical';
       case 'LPG':
-        if (value <= 1000) return 'good';                 // Safe LPG level
-        if (value <= 5000) return 'caution';              // Caution LPG level
-        if (value <= 10000) return 'danger';              // Caution kerosene level
-        return 'critical';                                 // Dangerous LPG level
-
+        if (value <= 1000) return 'good';
+        if (value <= 5000) return 'caution';
+        if (value <= 10000) return 'danger';
+        return 'critical';
       default:
-        return 'good'; // Default to good for any other sensor
+        return 'good';
     }
   };
 
   const sensorStat = getSensorStat(sensorName, value);
 
-  // Map sensor_stat to colors
   const getColor = () => {
     const colorMap = {
       good: 'green',
       caution: 'yellow',
       danger: 'orange',
-      critical: 'red', // You can define a critical status if needed
+      critical: 'red',
     };
-    return colorMap[sensorStat] || 'blue'; // Default to blue if stat is undefined
+    return colorMap[sensorStat] || 'blue';
   };
 
   const progress = Math.min(((value - minValue) / (maxValue - minValue)) * 100, 100);
   const color = getColor();
-
-  // Convert lastUpdate to a human-readable format
-  const formattedLastUpdate = lastUpdate
-    ? new Date(lastUpdate).toLocaleString()
-    : new Date().toLocaleString(); // Show current timestamp if no lastUpdate
 
   return (
     <div className="w-full">
@@ -101,7 +87,6 @@ const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorNa
           <span className="text-[8px] sm:text[8px] md:text-[10px] lg:text-[12px] font-semibold pl-1">{unit}</span>
         </div>
         <svg className="w-full" viewBox="0 0 100 50">
-          {/* Base arc */}
           <path
             d="M 10,50 A 40,40 0 0,1 90,50"
             fill="none"
@@ -109,15 +94,14 @@ const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorNa
             strokeWidth="10"
             strokeLinecap="round"
           />
-          {/* Progress arc */}
           <path
             d="M 10,50 A 40,40 0 0,1 90,50"
             fill="none"
             stroke={color}
             strokeWidth="10"
-            strokeDasharray="126" // Total arc length for a semicircle
-            strokeDashoffset={(126 * (1 - progress / 100)).toFixed(2)} // Progress based on arc length
-            strokeLinecap="round" // Smooth ends for progress
+            strokeDasharray="126"
+            strokeDashoffset={(126 * (1 - progress / 100)).toFixed(2)}
+            strokeLinecap="round"
           />
         </svg>
       </div>
@@ -130,9 +114,6 @@ const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorNa
           <span>{maxValue}</span>
           <span className="text-[8px] sm:text[8px] md:text-[9px] lg:text-[10px] pl-1">{unit}</span>
         </div>
-      </div>
-      <div className="mt-4 text-center text-sm text-gray-500">
-        {`Last updated: ${formattedLastUpdate}`}
       </div>
     </div>
   );
