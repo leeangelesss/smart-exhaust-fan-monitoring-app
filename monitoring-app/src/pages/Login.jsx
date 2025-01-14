@@ -39,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white font-sans">
+    <div className="min-h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/loginbg.jpg)' }}>
       <header className="flex items-center justify-between px-4 py-4">
         <Badge />
         <div className="flex items-center gap-2">
@@ -47,7 +47,7 @@ const Login = () => {
         </div>
       </header>
       <div className="flex items-center justify-center text-white font-sans px-4 sm:px-8">
-        <div className="w-full max-w-md p-10 bg-black bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg">
+        <div className="w-full max-w-md p-10 bg-black bg-opacity-40 backdrop-blur-lg rounded-lg shadow-lg">
           <h2 className="text-3xl font-bold text-center mb-6 text-teal-400">Login</h2>
           <form onSubmit={handleLogin} className="space-y-6">
             {/* Email Field */}

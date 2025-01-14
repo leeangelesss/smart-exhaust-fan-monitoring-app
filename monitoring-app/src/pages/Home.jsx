@@ -106,7 +106,7 @@ const sensors = [
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-slate-900 text-white font-sans">
+    <div className="min-h-screen bg-slate-900 text-white font-sans" style={{ backgroundImage: 'url(/loginbg.jpg)' }}>
       <header className="flex items-center justify-between px-4">
         <Badge />
         <div className="flex items-center gap-2">

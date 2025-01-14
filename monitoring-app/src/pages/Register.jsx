@@ -75,7 +75,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white font-sans px-4 sm:px-8">
+    <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white font-sans px-4 sm:px-8 "style={{ backgroundImage: 'url(/loginbg.jpg)' }}>
       <div className="w-full max-w-lg p-8 bg-black bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center mb-6 text-teal-400">Register</h2>
         <form onSubmit={handleRegister} className="space-y-5">

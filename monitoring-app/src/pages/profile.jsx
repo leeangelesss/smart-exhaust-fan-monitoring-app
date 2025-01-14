@@ -63,7 +63,7 @@ const Profile = () => {
   }, []); // Runs once when the component is mounted
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white font-sans">
+    <div className="min-h-screen bg-slate-900 text-white font-sans" style={{ backgroundImage: 'url(/loginbg.jpg)' }}>
       <header className="flex items-center justify-between px-4">
         <Badge />
         <div className="flex items-center gap-2">
@@ -72,7 +72,7 @@ const Profile = () => {
         </div>
       </header>
 
-      <main className="flex items-center justify-center my-auto">
+      <main className="flex items-center justify-center my-auto px-4">
         <div className="w-full max-w-md p-8 bg-black bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold text-center mb-4 text-teal-400">
             Profile Settings

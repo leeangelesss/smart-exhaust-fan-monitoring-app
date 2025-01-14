@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, Route, Routes } from 'react-router-dom';
 import { supabase } from '../utils/supabase';
 import Login from '../pages/Login';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 const UserContainer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,21 +59,13 @@ const UserContainer = () => {
           <span className="text-white text-sm font-semibold"></span>
         </div>
 
-        <div className="absolute -bottom-1 -right-1 bg-white rounded-full p-1 shadow-md">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className={`w-5 h-5 text-gray-500 transition-transform ${
+        <div className="absolute -bottom-1 -right-1 p-1 shadow-md">
+          <FontAwesomeIcon
+            icon={faChevronDown}
+            className={`text-gray-500 transition-transform ${
               isOpen ? 'rotate-180' : ''
-            }`}
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
+            } w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 lg:w-4 lg:h-4 rounded-full bg-white p-2`}
+          />
         </div>
       </div>
 
