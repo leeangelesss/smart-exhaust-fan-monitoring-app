@@ -1,53 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import Badge from '../components/Badge';
-import DateTime from './../components/DateTime';
-import UserContainer from './../components/UserContainer';
-import { supabase, supabaseKeyExport } from '../utils/supabase'; // Import supabase and supabaseKeyExport
+import React, { useState, useEffect } from "react";
+import Badge from "../components/Badge";
+import DateTime from "./../components/DateTime";
+import UserContainer from "./../components/UserContainer";
+import { supabase, supabaseKeyExport } from "../utils/supabase"; // Import supabase and supabaseKeyExport
 
 const Profile = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    address: '',
-    phoneNumber: '',
+    name: "", // Combined first name and last name
+    email: "",
+    address: "",
+    phoneNumber: "",
   });
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         // Fetch the current logged-in user
-        const { data: { user }, error: userError } = await supabase.auth.getUser();
+        const {
+          data: { user },
+          error: userError,
+        } = await supabase.auth.getUser();
 
         if (userError) throw new Error(userError.message);
 
         if (user) {
           // Fetch the user data using the provided URL
-          const response = await fetch(`https://mzknnjfsehbhlnlrbhfu.supabase.co/rest/v1/users?auth_uid=eq.${user.id}`, {
-            headers: {
-              'apikey': supabaseKeyExport, // Use the exported supabaseKey
-              'Authorization': `Bearer ${supabaseKeyExport}`, // Use the exported supabaseKey
-            },
-          });
+          const response = await fetch(
+            `https://mzknnjfsehbhlnlrbhfu.supabase.co/rest/v1/users?auth_uid=eq.${user.id}`,
+            {
+              headers: {
+                apikey: supabaseKeyExport, // Use the exported supabaseKey
+                Authorization: `Bearer ${supabaseKeyExport}`, // Use the exported supabaseKey
+              },
+            }
+          );
 
           if (!response.ok) {
-            throw new Error('Error fetching user data');
+            throw new Error("Error fetching user data");
           }
 
           const data = await response.json();
 
           // Log the fetched data for debugging
-          console.log('Fetched User Data:', data);
+          console.log("Fetched User Data:", data);
 
           // Check if data exists before updating state
           if (data && data.length > 0) {
             setFormData({
-              email: data[0].email || '',
-              address: data[0].address || '',
-              phoneNumber: data[0].phone_number || '',
+              name: `${data[0].first_name || ""} ${data[0].last_name || ""}`.trim(),
+              email: data[0].email || "",
+              address: data[0].address || "",
+              phoneNumber: data[0].phone_number || "",
             });
           }
         }
       } catch (error) {
-        console.error('Error fetching user data:', error.message);
+        console.error("Error fetching user data:", error.message);
       }
     };
 
@@ -65,34 +73,56 @@ const Profile = () => {
       </header>
 
       <main className="flex items-center justify-center my-auto">
-        <div className="w-full max-w-md p-10 bg-black bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg">
-          <h2 className="text-3xl font-bold text-center mb-6 text-teal-400">Profile Settings</h2>
-          <p className="text-gray-300 text-center mb-8">
+        <div className="w-full max-w-md p-8 bg-black bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold text-center mb-4 text-teal-400">
+            Profile Settings
+          </h2>
+          <p className="text-gray-300 text-center text-base mb-8">
             Your account information is displayed below.
           </p>
-          <div className="space-y-6">
+          <div className="space-y-4 text-sm">
             <div className="relative">
-              <label htmlFor="email" className="block text-base font-semibold text-teal-400">
+              <label
+                htmlFor="name"
+                className="block font-semibold text-teal-400"
+              >
+                Name
+              </label>
+              <div className="w-full px-4 py-3 mt-1 bg-gray-600 bg-opacity-20 text-white rounded-lg">
+                {formData.name || "Loading..."}
+              </div>
+            </div>
+            <div className="relative">
+              <label
+                htmlFor="email"
+                className="block font-semibold text-teal-400"
+              >
                 Email
               </label>
               <div className="w-full px-4 py-3 mt-1 bg-gray-600 bg-opacity-20 text-white rounded-lg">
-                {formData.email || 'Loading...'}
+                {formData.email || "Loading..."}
               </div>
             </div>
             <div className="relative">
-              <label htmlFor="address" className="block text-base font-semibold text-teal-400">
+              <label
+                htmlFor="address"
+                className="block font-semibold text-teal-400"
+              >
                 Address
               </label>
-              <div className="w-full px-4 py-3 mt-1 bg-gray-600 bg-opacity-20 text-white rounded-lg ">
-                {formData.address || 'Loading...'}
+              <div className="w-full px-4 py-3 mt-1 bg-gray-600 bg-opacity-20 text-white rounded-lg">
+                {formData.address || "Loading..."}
               </div>
             </div>
             <div className="relative">
-              <label htmlFor="phoneNumber" className="block text-base font-semibold text-teal-400">
+              <label
+                htmlFor="phoneNumber"
+                className="block font-semibold text-teal-400"
+              >
                 Phone Number
               </label>
               <div className="w-full px-4 py-3 mt-1 bg-gray-600 bg-opacity-20 text-white rounded-lg">
-                {formData.phoneNumber || 'Loading...'}
+                {formData.phoneNumber || "Loading..."}
               </div>
             </div>
           </div>

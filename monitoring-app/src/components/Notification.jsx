@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { supabase } from "../utils/supabase";
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+
 import alertDetails from "../../alertDetails";
 
 const Notification = () => {
@@ -86,12 +88,12 @@ const Notification = () => {
           </div>
         )}
         <div
-          className="rounded-full bg-gray-300 p-2 cursor-pointer w-12 h-12 flex justify-center items-center m-5 shadow-lg"
+          className="rounded-full bg-teal-300 p-2 cursor-pointer w-12 h-12 flex justify-center items-center m-5 shadow-lg hover:bg-teal-500"
           onClick={handleToggleModal}
           role="button"
           aria-label="Show Notification"
         >
-          <p className="text-2xl">⚠️</p>
+          <FontAwesomeIcon icon={faTriangleExclamation} className="text-2xl text-black" />
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfo, faArrowLeft, faArrowRight, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faInfo, faTimes } from '@fortawesome/free-solid-svg-icons';
 import alertDetails from '../../alertDetails';
 
 const Information = () => {
@@ -24,27 +24,31 @@ const Information = () => {
 
   const renderPageContent = (page) => {
     const pageData = alertDetails[page];
-    const levels = Object.keys(pageData);
+    const levels = Object.keys(pageData).filter((key) => key !== 'icon'); // Exclude "icon" key
 
     return (
       <div>
-        <h2 className="text-2xl font-bold mb-4 text-justify text-black">{pageData[levels[0]].title}</h2>
+        <div className="flex items-center mb-4">
+          {/* Dynamically render the icon */}
+          <img src={pageData.icon} alt={`${page} icon`} className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 mr-3" />
+          <h2 className="text-xl sm:text-xl md:text-2xl lg:text-3xl font-bold text-black flex-grow">{pageData[levels[0]].title}</h2>
+        </div>
         {levels.map((level) => (
-          <div key={level} className="mb-4">
-            <h3 className="font-bold text-lg text-justify">{level}</h3>
-            <div className='pl-4'>
-                <p className="text-justify font-semibold italic">Effects:</p>
-                <ul className="list-disc ml-5 text-justify">
+          <div key={level} className="mb-6 text-sm sm:text-sm md:text-base lg:text-base">
+            <h3 className="font-bold text-black">{level}</h3>
+            <div className="pl-4">
+              <p className="font-semibold italic ">Effects:</p>
+              <ul className="list-disc ml-5">
                 {pageData[level].effects.map((effect, index) => (
-                    <li key={index}>{effect}</li>
+                  <li key={index}>{effect}</li>
                 ))}
-                </ul>
-                <p className="mt-2 text-justify font-semibold italic">Guidelines:</p>
-                <ul className="list-disc ml-5 text-justify">
+              </ul>
+              <p className="mt-2 font-semibold italic">Guidelines:</p>
+              <ul className="list-disc ml-5">
                 {(pageData[level].guidelines || pageData[level].health_tips).map((tip, index) => (
-                    <li key={index}>{tip}</li>
+                  <li key={index}>{tip}</li>
                 ))}
-                </ul>
+              </ul>
             </div>
           </div>
         ))}
@@ -56,7 +60,7 @@ const Information = () => {
     <div className="relative text-black">
       <button
         onClick={toggleModal}
-        className="rounded-full bg-gray-300 p-2 cursor-pointer w-12 h-12 flex justify-center items-center m-5 shadow-lg"
+        className="rounded-full bg-teal-300 p-2 cursor-pointer w-12 h-12 flex justify-center items-center m-5 shadow-lg hover:bg-teal-500"
         aria-label="Information"
       >
         <FontAwesomeIcon icon={faInfo} className="text-xl" />
@@ -74,25 +78,25 @@ const Information = () => {
             </button>
 
             {/* Scrollable Content */}
-            <div className="p-6 overflow-y-auto h-[calc(100%-80px)]">
+            <div className="p-6 overflow-y-auto h-[calc(100%-100px)]">
               {renderPageContent(pages[currentPage])}
             </div>
 
             {/* Fixed Navigation Buttons */}
-            <div className="absolute bottom-0 left-0 right-0 flex justify-between items-center p-4 bg-gray-100 border-t">
+            <div className="absolute bottom-5 left-0 right-0 flex justify-center items-center space-x-4">
               <button
                 onClick={prevPage}
-                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                className="px-4 py-2 bg-blue-500 text-white rounded shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
                 aria-label="Previous"
               >
-                <FontAwesomeIcon icon={faArrowLeft} className="text-lg" />
+                Previous
               </button>
               <button
                 onClick={nextPage}
-                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                className="px-4 py-2 bg-blue-500 text-white rounded shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
                 aria-label="Next"
               >
-                <FontAwesomeIcon icon={faArrowRight} className="text-lg" />
+                Next
               </button>
             </div>
           </div>

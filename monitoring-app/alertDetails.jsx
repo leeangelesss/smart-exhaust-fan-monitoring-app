@@ -1,5 +1,13 @@
+import TEMP from "./public/images/sensorIcons/temperature.png";
+import HUMID from "./public/images/sensorIcons/humidity.png";
+import SMOKE from "./public/images/sensorIcons/smoke.png";
+import KEROSENE from "./public/images/sensorIcons/kerosene.png";
+import LPG from "./public/images/sensorIcons/lpg.png";
+import AIRQUAL from "./public/images/sensorIcons/airquality.png";
+
 const alertDetails = {
     Temperature: {
+      icon : TEMP,
       Caution: {
         title: "Temperature Levels",
         effects: [
@@ -33,6 +41,7 @@ const alertDetails = {
       }
     },
     Humidity: {
+      icon : HUMID,
       Caution: {
         title: "Humidity Levels",
         effects: [
@@ -65,6 +74,7 @@ const alertDetails = {
       }
     },
     Kerosene: {
+      icon : KEROSENE,
       Caution: {
         title: "Kerosene Levels",
         effects: [
@@ -97,6 +107,7 @@ const alertDetails = {
       }
     },
     LPG: {
+      icon : LPG,
       Caution: {
         title: "LPG Exposure Levels",
         effects: [
@@ -129,6 +140,7 @@ const alertDetails = {
       }
     },
     AirQuality: {
+      icon : AIRQUAL,
       Caution: {
         title: "Air Quality Levels",
         effects: [
@@ -161,6 +173,7 @@ const alertDetails = {
       }
     },
     Smoke: {
+        icon : SMOKE,
         Caution: {
           title: "Smoke - Carbon Monoxide (CO) Levels",
           effects: [
