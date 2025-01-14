@@ -3,6 +3,7 @@ import { supabase } from '../utils/supabase';
 
 const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorName }) => {
   const [lastUpdate, setLastUpdate] = useState(null);
+  const [progress, setProgress] = useState(0); // Track the progress
 
   useEffect(() => {
     // Fetch last update from Supabase
@@ -26,6 +27,12 @@ const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorNa
 
     fetchSensorData();
   }, [sensorId]);
+
+  useEffect(() => {
+    // Calculate progress
+    const newProgress = Math.min(((value - minValue) / (maxValue - minValue)) * 100, 100);
+    setProgress(newProgress);
+  }, [value, minValue, maxValue]);
 
   const getSensorStat = (sensorName, value) => {
     switch (sensorName) {
@@ -76,7 +83,6 @@ const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorNa
     return colorMap[sensorStat] || 'blue';
   };
 
-  const progress = Math.min(((value - minValue) / (maxValue - minValue)) * 100, 100);
   const color = getColor();
 
   return (
@@ -102,6 +108,9 @@ const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorNa
             strokeDasharray="126"
             strokeDashoffset={(126 * (1 - progress / 100)).toFixed(2)}
             strokeLinecap="round"
+            style={{
+              transition: 'stroke-dashoffset 1s ease-out', // Animation for smooth progress change
+            }}
           />
         </svg>
       </div>
