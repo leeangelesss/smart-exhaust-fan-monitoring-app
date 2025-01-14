@@ -42,7 +42,7 @@ const sensors = [
         icon={humidity}
         unit="%"
         minValue={0}
-        maxValue={100}
+        maxValue={90}
       />
     ),
   },
