@@ -37,7 +37,7 @@ const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorNa
   const getSensorStat = (sensorName, value) => {
     switch (sensorName) {
       case 'Temperature':
-        if (value >= 20 && value <= 32) return 'good';
+        if (value >= 20 && value <= 31) return 'good';
         if (value <= 41) return 'caution';
         if (value <= 51) return 'danger';
         return 'critical';
