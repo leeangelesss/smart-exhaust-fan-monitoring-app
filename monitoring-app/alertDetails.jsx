@@ -1,9 +1,9 @@
-import TEMP from "./public/images/sensorIcons/temperature.png";
-import HUMID from "./public/images/sensorIcons/humidity.png";
-import SMOKE from "./public/images/sensorIcons/smoke.png";
-import KEROSENE from "./public/images/sensorIcons/kerosene.png";
-import LPG from "./public/images/sensorIcons/lpg.png";
-import AIRQUAL from "./public/images/sensorIcons/airquality.png";
+import TEMP from "/images/sensorIcons/temperature.png";
+import HUMID from "/images/sensorIcons/humidity.png";
+import SMOKE from "/images/sensorIcons/smoke.png";
+import KEROSENE from "/images/sensorIcons/kerosene.png";
+import LPG from "/images/sensorIcons/lpg.png";
+import AIRQUAL from "/images/sensorIcons/airquality.png";
 
 const alertDetails = {
     Temperature: {

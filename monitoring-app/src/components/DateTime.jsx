@@ -9,7 +9,7 @@ const DateTime = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-end gap-1 text-right">
+    <div className="flex flex-col items-end gap-1 text-right mr-1">
       <span className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl">
         {time.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
       </span>

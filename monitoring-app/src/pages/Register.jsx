@@ -76,9 +76,9 @@ const Register = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white font-sans px-4 sm:px-8">
-      <div className="w-full max-w-lg p-10 bg-black bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg">
+      <div className="w-full max-w-lg p-8 bg-black bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center mb-6 text-teal-400">Register</h2>
-        <form onSubmit={handleRegister} className="space-y-6">
+        <form onSubmit={handleRegister} className="space-y-5">
           {/* First Name and Last Name Fields */}
           <div className="flex space-x-4">
             <div className="relative w-1/2">
@@ -88,7 +88,7 @@ const Register = () => {
               <input
                 type="text"
                 id="firstName"
-                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
+                className="w-full px-4 mt-2 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
                 placeholder="Enter your first name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
@@ -102,7 +102,7 @@ const Register = () => {
               <input
                 type="text"
                 id="lastName"
-                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
+                className="w-full px-4 pl-4 mt-2 py-3 bg-gray-600 bg-opacity-20 text-white text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
                 placeholder="Enter your last name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
@@ -143,7 +143,7 @@ const Register = () => {
                   className="absolute right-4 text-gray-300 cursor-pointer"
                   onClick={togglePasswordVisibility}
                 >
-                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                  <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
                 </span>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -167,7 +167,7 @@ const Register = () => {
                   className="absolute right-4 text-gray-300 cursor-pointer"
                   onClick={toggleConfirmPasswordVisibility}
                 >
-                  <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+                  <FontAwesomeIcon icon={showConfirmPassword ? faEye : faEyeSlash} />
                 </span>
                 <input
                   type={showConfirmPassword ? "text" : "password"}
@@ -227,7 +227,7 @@ const Register = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-3 mt-4 bg-teal-500 text-white text-sm sm:text-sm md:text-base lg:text-base font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all tracking-wide"
+            className="w-full py-2 mt-4 bg-teal-500 text-white text-sm sm:text-sm md:text-base lg:text-base font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all tracking-wide"
           >
             Register
           </button>

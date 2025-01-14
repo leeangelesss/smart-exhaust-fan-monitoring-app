@@ -50,7 +50,7 @@ const UserContainer = () => {
         <img
           src="PUPLogo.png"
           alt="User"
-          className="rounded-full object-contain w-full h-full"
+          className="rounded-full object-contain w-16 sm:w-14 md:w-16 lg:w-16 xl:w-20 h-auto"
         />
 
         <div className="absolute inset-0 rounded-full bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
