@@ -5,6 +5,8 @@ import { faUser, faEye, faEyeSlash, faPhone, faMapMarkerAlt } from "@fortawesome
 import { supabase } from "../utils/supabase"; // Ensure this path is correct
 
 const Register = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -27,10 +29,9 @@ const Register = () => {
         email,
         password,
         options: {
-          emailRedirectTo: "http://localhost:5173/home",
+          emailRedirectTo: "https://aerosense-thesis.vercel.app/login",
         },
       });
-
 
       if (error) {
         console.error("Error signing up:", error.message);
@@ -38,11 +39,17 @@ const Register = () => {
       } else {
         // Insert additional user information into the 'users' table
         const { user } = data;
-        console.log(data);
         const { error: insertError } = await supabase
           .from('users')
           .insert([
-            {email, address, phone_number: phoneNumber, auth_uid: user.user_metadata.sub},
+            {
+              first_name: firstName,
+              last_name: lastName,
+              email,
+              address,
+              phone_number: phoneNumber,
+              auth_uid: user.user_metadata.sub,
+            },
           ]);
 
         if (insertError) {
@@ -59,8 +66,6 @@ const Register = () => {
     }
   };
 
-
-
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -70,14 +75,45 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white font-sans">
-      {/* Glassmorphism Container */}
-      <div className="w-full max-w-md p-10 bg-black bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg">
+    <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white font-sans px-4 sm:px-8">
+      <div className="w-full max-w-lg p-10 bg-black bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg">
         <h2 className="text-3xl font-bold text-center mb-6 text-teal-400">Register</h2>
         <form onSubmit={handleRegister} className="space-y-6">
+          {/* First Name and Last Name Fields */}
+          <div className="flex space-x-4">
+            <div className="relative w-1/2">
+              <label htmlFor="firstName" className="block text-sm font-semibold text-teal-400">
+                First Name
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
+                placeholder="Enter your first name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="relative w-1/2">
+              <label htmlFor="lastName" className="block text-sm font-semibold text-teal-400">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
+                placeholder="Enter your last name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+
           {/* Email Field */}
           <div className="relative">
-            <label htmlFor="email" className="block text-base font-semibold text-teal-400">
+            <label htmlFor="email" className="block text-sm font-semibold text-teal-400">
               Email
             </label>
             <div className="flex items-center mt-2">
@@ -87,7 +123,7 @@ const Register = () => {
               <input
                 type="email"
                 id="email"
-                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
+                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -96,57 +132,59 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Password Field */}
-          <div className="relative">
-            <label htmlFor="password" className="block text-base font-semibold text-teal-400">
-              Password
-            </label>
-            <div className="flex items-center mt-2">
-              <span
-                className="absolute right-4 text-gray-300 cursor-pointer"
-                onClick={togglePasswordVisibility}
-              >
-                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
-              </span>
-              <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
+          <div className="flex space-x-4">
+            {/* Password Field */}
+            <div className="relative w-1/2">
+              <label htmlFor="password" className="block text-sm font-semibold text-teal-400">
+                Password
+              </label>
+              <div className="flex items-center mt-2">
+                <span
+                  className="absolute right-4 text-gray-300 cursor-pointer"
+                  onClick={togglePasswordVisibility}
+                >
+                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                </span>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
             </div>
-          </div>
 
-          {/* Confirm Password Field */}
-          <div className="relative">
-            <label htmlFor="confirmPassword" className="block text-base font-semibold text-teal-400">
-              Confirm Password
-            </label>
-            <div className="flex items-center mt-2">
-              <span
-                className="absolute right-4 text-gray-300 cursor-pointer"
-                onClick={toggleConfirmPasswordVisibility}
-              >
-                <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
-              </span>
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                id="confirmPassword"
-                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
-                placeholder="Re-enter your password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
+            {/* Confirm Password Field */}
+            <div className="relative w-1/2">
+              <label htmlFor="confirmPassword" className="block text-sm font-semibold text-teal-400">
+                Confirm Password
+              </label>
+              <div className="flex items-center mt-2">
+                <span
+                  className="absolute right-4 text-gray-300 cursor-pointer"
+                  onClick={toggleConfirmPasswordVisibility}
+                >
+                  <FontAwesomeIcon icon={showConfirmPassword ? faEyeSlash : faEye} />
+                </span>
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirmPassword"
+                  className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
+                  placeholder="Re-enter your password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </div>
             </div>
           </div>
 
           {/* Address Field */}
           <div className="relative">
-            <label htmlFor="address" className="block text-base font-semibold text-teal-400">
+            <label htmlFor="address" className="block text-sm font-semibold text-teal-400">
               Address
             </label>
             <div className="flex items-center mt-2">
@@ -156,7 +194,7 @@ const Register = () => {
               <input
                 type="text"
                 id="address"
-                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
+                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
                 placeholder="Enter your address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -167,7 +205,7 @@ const Register = () => {
 
           {/* Phone Number Field */}
           <div className="relative">
-            <label htmlFor="phoneNumber" className="block text-base font-semibold text-teal-400">
+            <label htmlFor="phoneNumber" className="block text-sm font-semibold text-teal-400">
               Phone Number
             </label>
             <div className="flex items-center mt-2">
@@ -177,7 +215,7 @@ const Register = () => {
               <input
                 type="text"
                 id="phoneNumber"
-                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
+                className="w-full px-4 pl-4 py-3 bg-gray-600 bg-opacity-20 text-white text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-white placeholder-opacity-50"
                 placeholder="Enter your phone number"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
@@ -189,17 +227,17 @@ const Register = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-3 mt-4 bg-teal-500 text-white text-xl font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all tracking-wide"
+            className="w-full py-3 mt-4 bg-teal-500 text-white text-sm sm:text-sm md:text-base lg:text-base font-medium rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all tracking-wide"
           >
             Register
           </button>
         </form>
 
         {/* Login Link */}
-        <p className="mt-6 text-base text-center text-white tracking-wide">
+        <p className="mt-6 text-base text-center text-white tracking-wide text-sm">
           Already have an account?{" "}
           <button
-            className="text-[#00d4ff] hover:underline"
+            className="text-[#00d4ff] text-sm hover:underline"
             onClick={() => navigate("/login")}
           >
             Login
