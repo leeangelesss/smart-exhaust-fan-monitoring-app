@@ -70,7 +70,7 @@ const sensors = [
         icon={smoke}
         unit="ppm"
         minValue={0}
-        maxValue={10000}
+        maxValue={500}
       />
     ),
   },
@@ -84,7 +84,7 @@ const sensors = [
         icon={kerosene}
         unit="ppm"
         minValue={0}
-        maxValue={1200}
+        maxValue={1000}
       />
     ),
   },
