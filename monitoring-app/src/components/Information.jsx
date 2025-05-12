@@ -24,7 +24,7 @@ const Information = () => {
 
   const getLevelStyles = (level) => {
     const baseStyle =
-      'mb-4 p-4 rounded-lg shadow-lg border-l-0 border-r-0 border-b-4 border-l-4 bg-teal-800 text-white'; // Updated to darker teal
+      'mb-4 p-4 rounded-lg shadow-lg border-b-4 bg-teal-800 text-white'; // Updated to darker teal
     switch (level) {
       case 'Caution':
         return `${baseStyle} border-yellow-500 text-lg`;
