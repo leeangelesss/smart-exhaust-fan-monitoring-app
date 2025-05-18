@@ -49,9 +49,9 @@ const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorNa
   const getSensorStat = (sensorName, value) => {
     switch (sensorName) {
       case 'Temperature':
-        if (value <= 32) return 'good';
-        if (value <= 41) return 'caution';
-        if (value <= 51) return 'danger';
+        if (value <= 32.9) return 'good';
+        if (value <= 41.9) return 'caution';
+        if (value <= 51.9) return 'danger';
         return 'critical';
       case 'Humidity':
         if (value >= 76 && value <= 90) return 'critical';
@@ -60,13 +60,13 @@ const SensorProgressBar = ({ sensorId, minValue, maxValue, value, unit, sensorNa
         return 'good';
       case 'AirQuality':
         if (value <= 25) return 'good';
-        if (value <= 200) return 'caution';
-        if (value <= 300) return 'danger';
-        return 'critical';
-      case 'Smoke':
-        if (value <= 50) return 'good';
         if (value <= 100) return 'caution';
         if (value <= 399) return 'danger';
+        return 'critical';
+      case 'Smoke':
+        if (value <= 200) return 'good';
+        if (value <= 4500) return 'caution';
+        if (value <= 7500) return 'danger';
         return 'critical';
       case 'Kerosene':
         if (value <= 200) return 'good';
