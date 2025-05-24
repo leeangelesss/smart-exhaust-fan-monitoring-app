@@ -6,210 +6,114 @@ import LPG from "/images/sensorIcons/lpg.png";
 import AIRQUAL from "/images/sensorIcons/airquality.png";
 
 const alertDetails = {
-    Temperature: {
-      icon : TEMP,
-      Caution: {
-        title: "Temperature Levels",
-        effects: [
-          "Heat cramps and heat exhaustion are possible.",
-          "Continuing activity could lead to heat stroke."
-        ],
-        health_tips: [
-          "Stay indoors and limit physical activity.",
-          "Cool down with air conditioning or showers.",
-          "Recognize symptoms of heat exhaustion."
-        ]
-      },    
-      Danger: {
-        title: "Temperature Levels",
-        effects: [
-          "Heat cramps and heat exhaustion are likely.",
-          "Heat stroke is probable with continued exposure."
-        ],
-        health_tips: [
-          "Stay in cool, air-conditioned areas.",
-          "Hydrate frequently and avoid sugary drinks."
-        ]
-      },
-      Critical: {
-        title: "Temperature Levels",
-        effects: ["Heat stroke is imminent."],
-        health_tips: [
-          "Move to a cooler location immediately.",
-          "Seek medical help if symptoms occur."
-        ]
-      }
+  Temperature: {
+    icon: TEMP,
+    Caution: {
+      effects: "Prolonged exposure to high temperatures can lead to heat cramps and heat exhaustion, potentially progressing to heat stroke if activity continues.",
+      guidelines: "Stay indoors, limit physical activity, use air conditioning or take cool showers, and be vigilant for signs of heat-related illnesses.",
+      alerts: "Temperature is higher than normal. Stay hydrated, rest in a cool place, and reduce physical activity."
     },
-    Humidity: {
-      icon : HUMID,
-      Caution: {
-        title: "Humidity Levels",
-        effects: [
-          "Increased risk of respiratory issues and skin irritation."
-        ],
-        guidelines: [
-          "Use a humidifier to maintain proper humidity.",
-          "Hydrate your skin and drink water."
-        ]
-      },
-      Danger: {
-        title: "Humidity Levels",
-        effects: [
-          "Promotes mold and dust mite growth, causing allergies."
-        ],
-        guidelines: [
-          "Use a dehumidifier to lower humidity levels.",
-          "Clean surfaces prone to mold growth."
-        ]
-      },
-      Critical: {
-        title: "Humidity Levels",
-        effects: [
-          "Severe health hazards and structural damage."
-        ],
-        guidelines: [
-          "Address water leaks immediately.",
-          "Seek professional help for mold removal."
-        ]
-      }
+    Danger: {
+      effects: "Heat cramps and heat exhaustion are likely, with a high risk of heat stroke upon continued exposure.",
+      guidelines: "Remain in cool, air-conditioned environments, hydrate frequently, and avoid sugary drinks.",
+      alerts: "High temperature detected. Immediately move to a shaded or air-conditioned area and drink water often."
     },
-    Kerosene: {
-      icon : KEROSENE,
-      Caution: {
-        title: "Kerosene Levels",
-        effects: [
-          "May cause mild irritation, headaches, or dizziness."
-        ],
-        guidelines: [
-          "Ensure proper ventilation in kerosene-using areas.",
-          "Minimize indoor use of kerosene-based appliances."
-        ]
-      },
-      Danger: {
-        title: "Kerosene Levels",
-        effects: [
-          "Acute effects such as nausea, headaches, and dizziness."
-        ],
-        guidelines: [
-          "Stop using kerosene-based equipment immediately.",
-          "Improve ventilation and leave the area until air quality improves."
-        ]
-      },
-      Critical: {
-        title: "Kerosene Levels",
-        effects: [
-          "Severe risks including chemical pneumonitis and organ damage."
-        ],
-        guidelines: [
-          "Evacuate the area immediately.",
-          "Contact authorities for inspection and intervention."
-        ]
-      }
+    Critical: {
+      effects: "Heat stroke is imminent, posing life-threatening risks.",
+      guidelines: "Immediately move to a cooler location and seek assistance if symptoms occur.",
+      alerts: "Extreme heat levels. Get to a cool environment now, rest, and lower your body temperature with water or fans."
+    }
+  },
+  Humidity: {
+    icon: HUMID,
+    Caution: {
+      effects: "Elevated humidity increases the risk of respiratory issues and skin irritation.",
+      guidelines: "Maintain indoor humidity between 40-60% using humidifiers or dehumidifiers, and ensure adequate hydration.",
+      alerts: "Humidity is above normal. Use a fan or dehumidifier, and keep your skin dry to avoid irritation."
     },
-    LPG: {
-      icon : LPG,
-      Caution: {
-        title: "LPG Exposure Levels",
-        effects: [
-          "Mild health effects such as dizziness or drowsiness."
-        ],
-        guidelines: [
-          "Improve ventilation immediately by opening windows or using exhaust fans.",
-          "Avoid open flames or potential ignition sources."
-        ]
-      },
-      Danger: {
-        title: "LPG Exposure Levels",
-        effects: [
-          "Moderate symptoms like headaches and potential asphyxiation."
-        ],
-        guidelines: [
-          "Evacuate the area and improve ventilation.",
-          "Contact professionals to assess and mitigate risks."
-        ]
-      },
-      Critical: {
-        title: "LPG Exposure Levels",
-        effects: [
-          "Severe health risks such as asphyxiation and loss of consciousness."
-        ],
-        guidelines: [
-          "Evacuate the building immediately.",
-          "Call emergency services for assistance."
-        ]
-      }
+    Danger: {
+      effects: "High humidity promotes mold and dust mite growth, exacerbating allergies.",
+      guidelines: "Use dehumidifiers to lower humidity levels and regularly clean areas prone to mold.",
+      alerts: "Dangerous humidity detected. Increase airflow by opening windows and clean surfaces to prevent mold growth."
     },
-    AirQuality: {
-      icon : AIRQUAL,
-      Caution: {
-        title: "Air Quality Levels",
-        effects: [
-          "General public and sensitive individuals may experience irritation and respiratory issues."
-        ], 
-        guidelines: [
-          "Limit outdoor activities, especially for children and the elderly.",
-          "Keep windows closed and use air purifiers indoors."
-        ]
-      },
-      Danger: {
-        title: "Air Quality Levels",
-        effects: [
-          "Health effects become noticeable for the general public, with severe irritation for sensitive groups."
-        ],
-        guidelines: [
-          "Stay indoors with air purifiers running.",
-          "Seal gaps around windows and doors to prevent polluted air from entering."
-        ]
-      },
-      Critical: {
-        title: "Air Quality Levels",
-        effects: [
-          "High risk of adverse effects for everyone, including strong irritations and severe health hazards."
-        ],
-        guidelines: [
-          "Remain indoors and avoid any physical activity.",
-          "Use high-efficiency particulate air (HEPA) filters."
-        ]
-      }
+    Critical: {
+      effects: "Excessive humidity can cause severe health hazards and structural damage.",
+      guidelines: "Address water leaks promptly and consult professionals for mold remediation.",
+      alerts: "Extremely high humidity levels. Ventilate immediately, dry damp areas, and avoid confined humid spaces."
+    }
+  },
+  Kerosene: {
+    icon: KEROSENE,
+    Caution: {
+      effects: "Short-term exposure to kerosene vapors may cause mild irritation, headaches, or dizziness.",
+      guidelines: "Ensure proper ventilation in areas where kerosene is used and minimize indoor use of kerosene-based appliances.",
+      alerts: "Kerosene levels slightly elevated. Open windows and avoid lighting flames or using appliances."
     },
-    Smoke: {
-        icon : SMOKE,
-        Caution: {
-          title: "Smoke - Carbon Monoxide (CO) Levels",
-          effects: [
-            "Physical symptoms such as headaches, dizziness, and nausea after 6–8 hours of exposure."
+    Danger: {
+      effects: "Inhalation of kerosene vapors can lead to acute symptoms like nausea, headaches, and dizziness.",
+      guidelines: "Cease use of kerosene-based equipment, improve ventilation, and vacate the area until air quality improves.",
+      alerts: "Dangerous kerosene concentration. Turn off equipment, ventilate the area, and step outside temporarily."
+    },
+    Critical: {
+      effects: "High levels of kerosene exposure can result in severe health risks, including chemical pneumonitis and organ damage.",
+      guidelines: "Evacuate the area immediately and report the issue to the building maintenance or safety personnel for inspection.",
+      alerts: "Extremely high kerosene levels detected. Leave the room, get fresh air, and avoid re-entering until the smell clears."
+    }
+  },
+  LPG: {
+    icon: LPG,
+    Caution: {
+      effects: "Low-level LPG exposure may cause mild symptoms such as dizziness or drowsiness.",
+      guidelines: "Improve ventilation by opening windows or using exhaust fans, and avoid open flames or ignition sources.",
+      alerts: "Low-level LPG detected. Open windows, turn off gas appliances, and avoid creating sparks or flames."
+    },
+    Danger: {
+      effects: "Moderate LPG exposure can lead to headaches and potential asphyxiation.",
+      guidelines: "Evacuate the area, enhance ventilation, and consult professionals to assess and mitigate risks.",
+      alerts: "Moderate LPG levels found. Step outside for fresh air, increase ventilation, and avoid turning on electronics."
+    },
+    Critical: {
+      effects: "High LPG concentrations pose severe health risks, including asphyxiation and loss of consciousness.",
+      guidelines: "Evacuate the building immediately and inform onsite safety or maintenance staff for leak inspection and containment.",
+      alerts: "High LPG concentration detected. Get to open air immediately and do not return until the air is safe."
+    }
+  },
+  AirQuality: {
+    icon: AIRQUAL,
+    Caution: {
+      effects: "Poor air quality may cause irritation and respiratory issues, especially in sensitive individuals.",
+      guidelines: "Limit outdoor activities, keep windows closed, and use air purifiers indoors.",
+      alerts: "Reduced air quality detected. Limit outdoor activity, wear a mask if needed, and use air purifiers inside."
+    },
+    Danger: {
+      effects: "Deteriorating air quality can lead to noticeable health effects in the general public and severe irritation for sensitive groups.",
+      guidelines: "Stay indoors with air purifiers running and seal gaps around windows and doors to prevent polluted air from entering.",
+      alerts: "Poor air quality detected. Stay indoors, close windows, and use an air purifier or fan with a filter if available."
+    },
+    Critical: {
+      effects: "Extremely poor air quality poses high risks of adverse effects for everyone, including strong irritations and severe health hazards.",
+      guidelines: "Remain indoors, avoid physical activity, and use high-efficiency particulate air (HEPA) filters.",
+      alerts: "Extremely unhealthy air quality. Avoid all outdoor exposure, seal windows, and use high-quality indoor filters."
+    }
+  },
+  Smoke: {
+    icon: SMOKE,
+    Caution: {
+      effects: "Exposure to smoke can cause symptoms like headaches, dizziness, and nausea after several hours.",
+      guidelines: "Increase ventilation and discontinue use of potential carbon monoxide sources until inspected.",
+      alerts: "Smoke levels detected. Open windows to improve airflow and take breaks in cleaner areas."
+    },
+    Danger: {
+      effects: "Prolonged exposure to carbon monoxide can lead to fatigue, headaches, and nausea.",
+      guidelines: "Evacuate and ventilate the area immediately, contact a professional to assess CO sources, and do not re-enter until CO levels are confirmed safe.",
+      alerts: "High smoke levels. Leave the smoky space, breathe fresh air, and avoid exertion until air clears."
+    },
+    Critical: {
+      effects: "High concentrations of carbon monoxide can cause severe symptoms, including unconsciousness and potential fatalities within minutes.",
+      guidelines: "Follow all evacuation and safety protocols, and do not re-enter until professionals confirm air is safe.",
+      alerts: "Extremely high smoke concentration detected. Get to a clean-air area immediately and avoid re-entering for now."
+    }
+  }
+};
 
-          ],
-          guidelines: [
-            "Increase ventilation and stop using any potential CO sources until inspected.  ",
-             "Check for appliance malfunctions or improper exhaust systems." 
-          ]
-        },
-        Danger: {
-          title: "Smoke - Carbon Monoxide (CO) Levels",
-          effects: [
-            "Symptoms such as fatigue, headache, and nausea after prolonged exposure (2–8 hours). "
-          ],
-          guidelines: [
-            "Evacuate and ventilate the area immediately. ",
-            "Contact a professional to assess CO sources.",
-            "Do not re-enter the space until CO levels are confirmed safe. "
-          ]
-        },
-        Critical: {
-          title: "Smoke - Carbon Monoxide (CO) Levels",
-          effects: [
-            "Severe symptoms for 400-800 ppm (unconsciousness, potential fatalities) within 1–2 hours.",
-            " Fatal within minutes for 800 ppm and above (1–30 minutes depending on concentration). "
-          ],
-          guidelines: [
-            "Follow all evacuation and emergency protocols.",
-            "Avoid entering the area without professional assistance and proper protective gear.",
-            "Call emergency services immediately.",
-          ]
-        }
-      }
-  };
-  
-  export default alertDetails;
-  
+export default alertDetails;
